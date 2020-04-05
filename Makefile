@@ -14,7 +14,7 @@ all: $(EXECUTABLES)
 	$(CC) $(CFLAGS) -c $(SRC)
 	$(CC) $(CFLAGS) -o $@ $(OBJ)
 
-catcher: catcher.c
+dining-p: dining-p.c
 	gcc -g -c dining-p.c
 	gcc -g -o $@ dining-p.o
 
