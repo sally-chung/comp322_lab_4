@@ -11,11 +11,11 @@ CFLAGS=-g
 all: $(EXECUTABLES)
 
 	$(EXECUTABLES): $(SRC)
-	$(CC) $(CFLAGS) -c $(SRC)
+	$(CC) $(CFLAGS) -lpthread $(SRC)
 	$(CC) $(CFLAGS) -o $@ $(OBJ)
 
 dining-p: dining-p.c
-	gcc -g -c dining-p.c
+	gcc -g -lpthread dining-p.c
 	gcc -g -o $@ dining-p.o
 
 clean:
