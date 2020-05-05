@@ -9,3 +9,4 @@ Rice, rice, and rice.
      - renamed some things
      - formatting 
      - still having trouble with segfaulting at sem_wait
+     - fixed segfault
