@@ -1,4 +1,6 @@
 #! /bin/bash
-for((i=0;i<$1;i++)); do
+
+for((i=0; i<$i; i++)) 
+do
 	./dining-p $1 $i &
 done

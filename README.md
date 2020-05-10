@@ -10,3 +10,4 @@ Rice, rice, and rice.
      - formatting 
 5/04 - still having trouble with segfaulting at sem_wait
      - fixed segfault
+5/10 - edited launch-philophers.sh (not sure if working correctly)
