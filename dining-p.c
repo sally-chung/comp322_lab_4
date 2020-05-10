@@ -21,7 +21,7 @@ sem_t *chopstick_0;
 sem_t *chopstick_1;
 int full_cycle;
 
-void signal_handler(int phil_num, int full_cycle, int signum);
+void signal_handler(int phil_num, int full_cycle);
 void eat(int phil_num);
 void think(int phil_num);
 void wait2(sem_t *chopstick);
@@ -29,23 +29,22 @@ void signal2(sem_t *chopstick);
 
 int main(int argc, char *argv[])
 {
-    int full_cycle;
-    full_cycle = 0;
+    int full_cycle = 0;
 
-    int value;
+    int value1, value2;
 
-    int i;
-    i = 0;
 
     int phil_num = strtol(argv[1], NULL, 10);
 
     chopstick_0 = sem_open(SEM_FILE0, O_CREAT, 0666, 1);
     chopstick_1 = sem_open(SEM_FILE1, O_CREAT, 0666, 1);
 
-    sem_getvalue(chopstick_0, &value);
-    printf("value: %d\n", value);
+    sem_getvalue(chopstick_0, &value1);
+    sem_getvalue(chopstick_1, &value2);
+    printf("value1: %d\n", value1);
+    printf("value2: %d\n", value2);
 
-    do {
+    while (full_cycle<10){
         wait2(chopstick_0);
         wait2(chopstick_1);
 
@@ -54,19 +53,17 @@ int main(int argc, char *argv[])
 
         signal2(chopstick_0);
         signal2(chopstick_1);
-        
+
         // think for awhile
         think(phil_num);
-        i++;
         full_cycle++;
 
-    } while (i < 2);
+    };
 
-    signal_handler(phil_num, full_cycle, 5);
+    signal_handler(phil_num, full_cycle);
 
     sem_close(chopstick_0);
     sem_close(chopstick_1);
-
     sem_unlink(SEM_FILE0);
     sem_unlink(SEM_FILE1);
 
@@ -74,10 +71,9 @@ int main(int argc, char *argv[])
 }
 
 // signal handler for SIGTERM when cmd 'kill -TERM pid' is called
-void signal_handler(int phil_num, int full_cycle, int signum)
+void signal_handler(int phil_num, int full_cycle)
 {
     fprintf(stderr, "Philosopher #%d completed %d cycles\n", phil_num, full_cycle);
-    exit(signum);
 }
 
 void eat(int phil_num)

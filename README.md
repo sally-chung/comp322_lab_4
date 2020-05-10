@@ -8,5 +8,5 @@ Rice, rice, and rice.
 4/19-5/4 - changed 5 semaphores to 2
      - renamed some things
      - formatting 
-     - still having trouble with segfaulting at sem_wait
+5/04 - still having trouble with segfaulting at sem_wait
      - fixed segfault
